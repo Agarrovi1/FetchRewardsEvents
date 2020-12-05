@@ -19,6 +19,7 @@ class EventsMainView: UIView {
     public var eventTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.register(EventCell.self, forCellReuseIdentifier: "eventCell")
         return table
     }()
 
