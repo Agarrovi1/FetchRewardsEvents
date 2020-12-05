@@ -79,6 +79,9 @@
 		4D55CD62257BCEC200AC877F /* FetchRewardsEvents */ = {
 			isa = PBXGroup;
 			children = (
+				4D55CD87257BCFF600AC877F /* Models */,
+				4D55CD86257BCFEE00AC877F /* Views */,
+				4D55CD85257BCFD300AC877F /* Controllers */,
 				4D55CD63257BCEC200AC877F /* AppDelegate.swift */,
 				4D55CD65257BCEC200AC877F /* SceneDelegate.swift */,
 				4D55CD67257BCEC200AC877F /* ViewController.swift */,
@@ -97,6 +100,27 @@
 				4D55CD7C257BCEC500AC877F /* Info.plist */,
 			);
 			path = FetchRewardsEventsTests;
+			sourceTree = "<group>";
+		};
+		4D55CD85257BCFD300AC877F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4D55CD86257BCFEE00AC877F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4D55CD87257BCFF600AC877F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
