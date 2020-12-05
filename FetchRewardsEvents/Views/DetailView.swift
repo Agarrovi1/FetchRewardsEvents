@@ -32,6 +32,7 @@ class DetailView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureDetailView()
     }
     
     required init?(coder: NSCoder) {
@@ -39,6 +40,7 @@ class DetailView: UIView {
     }
     
     private func configureDetailView() {
+        backgroundColor = .white
         constrainDetailImage()
         constrainDetailDateLabel()
         constrainDetailLocationLabel()
@@ -47,8 +49,8 @@ class DetailView: UIView {
         addSubview(detailImageView)
         NSLayoutConstraint.activate([
             detailImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            detailImageView.widthAnchor.constraint(equalTo: widthAnchor,multiplier: 0.7),
-            detailImageView.heightAnchor.constraint(equalTo: widthAnchor,multiplier: 0.7),
+            detailImageView.widthAnchor.constraint(equalTo: widthAnchor,multiplier: 0.8),
+            detailImageView.heightAnchor.constraint(equalTo: widthAnchor,multiplier: 0.8),
             detailImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
@@ -56,16 +58,18 @@ class DetailView: UIView {
         addSubview(detailDateLabel)
         NSLayoutConstraint.activate([
             detailDateLabel.topAnchor.constraint(equalTo: detailImageView.bottomAnchor, constant: 8),
-            detailDateLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7),
-            detailDateLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
+            detailDateLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+            detailDateLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
+            detailDateLabel.centerXAnchor.constraint(equalTo: detailImageView.centerXAnchor)
         ])
     }
     private func constrainDetailLocationLabel() {
         addSubview(detailLocationLabel)
         NSLayoutConstraint.activate([
             detailLocationLabel.topAnchor.constraint(equalTo: detailDateLabel.bottomAnchor, constant: 8),
-            detailLocationLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7),
-            detailLocationLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
+            detailLocationLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+            detailLocationLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
+            detailLocationLabel.centerXAnchor.constraint(equalTo: detailImageView.centerXAnchor)
         ])
     }
     

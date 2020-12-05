@@ -79,6 +79,11 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = EventDetailVC()
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         view.frame.height * 0.25
     }
