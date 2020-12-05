@@ -33,4 +33,19 @@ struct APIClient {
             }
         }.resume()
     }
+    
+    func getImageData(urlString: String, completion: @escaping (Result<Data,Error>) ->()) {
+        guard let url = URL(string: urlString) else {
+            print("bad url")
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            if let data = data {
+                completion(.success(data))
+            }
+        }.resume()
+    }
 }
