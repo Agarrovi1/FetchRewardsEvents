@@ -15,14 +15,22 @@ struct EventWrapper: Codable {
 struct Event: Codable {
     let id: Int
     let datetimeUtc: String
-    let displayLocation: String
+    let venue: Venue
     let performers: [Performer]
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case datetimeUtc = "datetime_utc"
-        case displayLocation = "display_location"
+        case venue = "venue"
         case performers = "performers"
+    }
+}
+
+struct Venue: Codable {
+    let displayLocation: String
+    
+    enum CodingKeys: String, CodingKey {
+        case displayLocation = "display_location"
     }
 }
 

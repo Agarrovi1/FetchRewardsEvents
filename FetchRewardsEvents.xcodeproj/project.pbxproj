@@ -16,6 +16,7 @@
 		4D55CD7B257BCEC500AC877F /* FetchRewardsEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD7A257BCEC500AC877F /* FetchRewardsEventsTests.swift */; };
 		4D55CD89257BD0D500AC877F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD88257BD0D500AC877F /* Secrets.swift */; };
 		4D55CD8B257BE29C00AC877F /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD8A257BE29C00AC877F /* Events.swift */; };
+		4D55CD8D257BE70500AC877F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD8C257BE70500AC877F /* APIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		4D55CD7C257BCEC500AC877F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D55CD88257BD0D500AC877F /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		4D55CD8A257BE29C00AC877F /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		4D55CD8C257BE70500AC877F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				4D55CD8A257BE29C00AC877F /* Events.swift */,
+				4D55CD8C257BE70500AC877F /* APIClient.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				4D55CD64257BCEC200AC877F /* AppDelegate.swift in Sources */,
 				4D55CD66257BCEC200AC877F /* SceneDelegate.swift in Sources */,
 				4D55CD8B257BE29C00AC877F /* Events.swift in Sources */,
+				4D55CD8D257BE70500AC877F /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
