@@ -14,6 +14,8 @@
 		4D55CD6D257BCEC500AC877F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D55CD6C257BCEC500AC877F /* Assets.xcassets */; };
 		4D55CD70257BCEC500AC877F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D55CD6E257BCEC500AC877F /* LaunchScreen.storyboard */; };
 		4D55CD7B257BCEC500AC877F /* FetchRewardsEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD7A257BCEC500AC877F /* FetchRewardsEventsTests.swift */; };
+		4D55CD89257BD0D500AC877F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD88257BD0D500AC877F /* Secrets.swift */; };
+		4D55CD8B257BE29C00AC877F /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD8A257BE29C00AC877F /* Events.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		4D55CD76257BCEC500AC877F /* FetchRewardsEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRewardsEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D55CD7A257BCEC500AC877F /* FetchRewardsEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRewardsEventsTests.swift; sourceTree = "<group>"; };
 		4D55CD7C257BCEC500AC877F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D55CD88257BD0D500AC877F /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		4D55CD8A257BE29C00AC877F /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 				4D55CD6C257BCEC500AC877F /* Assets.xcassets */,
 				4D55CD6E257BCEC500AC877F /* LaunchScreen.storyboard */,
 				4D55CD71257BCEC500AC877F /* Info.plist */,
+				4D55CD88257BD0D500AC877F /* Secrets.swift */,
 			);
 			path = FetchRewardsEvents;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 		4D55CD87257BCFF600AC877F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4D55CD8A257BE29C00AC877F /* Events.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,8 +231,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D55CD68257BCEC200AC877F /* ViewController.swift in Sources */,
+				4D55CD89257BD0D500AC877F /* Secrets.swift in Sources */,
 				4D55CD64257BCEC200AC877F /* AppDelegate.swift in Sources */,
 				4D55CD66257BCEC200AC877F /* SceneDelegate.swift in Sources */,
+				4D55CD8B257BE29C00AC877F /* Events.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
