@@ -23,15 +23,14 @@ class EventsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegates()
-        loadEvents()
     }
     override func loadView() {
         super.loadView()
         view = eventsMainView
     }
     
-    private func loadEvents() {
-        api.getEvents(query: "footBall") { [weak self] (results) in
+    private func loadEvents(search: String) {
+        api.getEvents(query: search) { [weak self] (results) in
             switch results {
             case .failure(let error):
                 print(error)
@@ -43,6 +42,7 @@ class EventsVC: UIViewController {
     private func setDelegates() {
         eventsMainView.eventTableView.dataSource = self
         eventsMainView.eventTableView.delegate = self
+        eventsMainView.searchBar.delegate = self
     }
     private func loadImage(url: String,cell: EventCell) {
         api.getImageData(urlString: url) { (results) in
@@ -83,4 +83,10 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
         view.frame.height * 0.25
     }
     
+}
+
+extension EventsVC: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        loadEvents(search: searchBar.text ?? "")
+    }
 }
