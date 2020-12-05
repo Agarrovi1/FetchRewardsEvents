@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4D55CD64257BCEC200AC877F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD63257BCEC200AC877F /* AppDelegate.swift */; };
 		4D55CD66257BCEC200AC877F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD65257BCEC200AC877F /* SceneDelegate.swift */; };
-		4D55CD68257BCEC200AC877F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD67257BCEC200AC877F /* ViewController.swift */; };
 		4D55CD6B257BCEC200AC877F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D55CD69257BCEC200AC877F /* Main.storyboard */; };
 		4D55CD6D257BCEC500AC877F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D55CD6C257BCEC500AC877F /* Assets.xcassets */; };
 		4D55CD70257BCEC500AC877F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D55CD6E257BCEC500AC877F /* LaunchScreen.storyboard */; };
@@ -17,6 +16,8 @@
 		4D55CD89257BD0D500AC877F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD88257BD0D500AC877F /* Secrets.swift */; };
 		4D55CD8B257BE29C00AC877F /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD8A257BE29C00AC877F /* Events.swift */; };
 		4D55CD8D257BE70500AC877F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD8C257BE70500AC877F /* APIClient.swift */; };
+		4D55CD8F257BEFF600AC877F /* EventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD8E257BEFF600AC877F /* EventsVC.swift */; };
+		4D55CD91257BF0A100AC877F /* EventsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD90257BF0A100AC877F /* EventsMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,6 @@
 		4D55CD60257BCEC200AC877F /* FetchRewardsEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRewardsEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D55CD63257BCEC200AC877F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D55CD65257BCEC200AC877F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4D55CD67257BCEC200AC877F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4D55CD6A257BCEC200AC877F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4D55CD6C257BCEC500AC877F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D55CD6F257BCEC500AC877F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -44,6 +44,8 @@
 		4D55CD88257BD0D500AC877F /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		4D55CD8A257BE29C00AC877F /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		4D55CD8C257BE70500AC877F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		4D55CD8E257BEFF600AC877F /* EventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsVC.swift; sourceTree = "<group>"; };
+		4D55CD90257BF0A100AC877F /* EventsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +92,6 @@
 				4D55CD85257BCFD300AC877F /* Controllers */,
 				4D55CD63257BCEC200AC877F /* AppDelegate.swift */,
 				4D55CD65257BCEC200AC877F /* SceneDelegate.swift */,
-				4D55CD67257BCEC200AC877F /* ViewController.swift */,
 				4D55CD69257BCEC200AC877F /* Main.storyboard */,
 				4D55CD6C257BCEC500AC877F /* Assets.xcassets */,
 				4D55CD6E257BCEC500AC877F /* LaunchScreen.storyboard */,
@@ -112,6 +113,7 @@
 		4D55CD85257BCFD300AC877F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4D55CD8E257BEFF600AC877F /* EventsVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -119,6 +121,7 @@
 		4D55CD86257BCFEE00AC877F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4D55CD90257BF0A100AC877F /* EventsMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,12 +236,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D55CD68257BCEC200AC877F /* ViewController.swift in Sources */,
+				4D55CD91257BF0A100AC877F /* EventsMainView.swift in Sources */,
 				4D55CD89257BD0D500AC877F /* Secrets.swift in Sources */,
 				4D55CD64257BCEC200AC877F /* AppDelegate.swift in Sources */,
 				4D55CD66257BCEC200AC877F /* SceneDelegate.swift in Sources */,
 				4D55CD8B257BE29C00AC877F /* Events.swift in Sources */,
 				4D55CD8D257BE70500AC877F /* APIClient.swift in Sources */,
+				4D55CD8F257BEFF600AC877F /* EventsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

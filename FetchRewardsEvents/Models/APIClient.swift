@@ -27,7 +27,6 @@ struct APIClient {
             }
             do {
                 let eventWrapper = try JSONDecoder().decode(EventWrapper.self, from: data)
-                dump(eventWrapper.events)
                 return completion(.success(eventWrapper.events))
             } catch {
                 print(error)
