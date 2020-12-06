@@ -34,6 +34,7 @@ class EventCell: UITableViewCell {
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         return locationLabel
     }()
+    public var favButton = FavButton(pointSize: 40)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,6 +57,8 @@ class EventCell: UITableViewCell {
         constrainNameLabel()
         constrainLocationLabel()
         constrainDateLabel()
+        constrainFavButton()
+        favButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     private func constrainImageView() {
         contentView.addSubview(eventImage)
@@ -91,5 +94,14 @@ class EventCell: UITableViewCell {
             dateLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
+    }
+    private func constrainFavButton() {
+        contentView.addSubview(favButton)
+        NSLayoutConstraint.activate([
+            favButton.topAnchor.constraint(equalTo: locationLabel.centerYAnchor),
+            favButton.centerXAnchor.constraint(equalTo: eventImage.centerXAnchor)])
+    }
+    @objc private func buttonTapped() {
+        favButton.changeHeartImage()
     }
 }

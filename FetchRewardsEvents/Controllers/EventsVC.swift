@@ -57,7 +57,6 @@ class EventsVC: UIViewController {
             }
         }
     }
-
 }
 
 extension EventsVC: UITableViewDataSource, UITableViewDelegate {

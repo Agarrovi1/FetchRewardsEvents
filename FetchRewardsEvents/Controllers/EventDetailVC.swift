@@ -10,6 +10,8 @@ import UIKit
 
 class EventDetailVC: UIViewController {
     let detailMainView = DetailView()
+    
+    var heartStatus = HeartImage.unfilled
     var event: Event?
     let api = APIClient()
 
@@ -30,6 +32,7 @@ class EventDetailVC: UIViewController {
         detailMainView.detailLocationLabel.text = event.venue.displayLocation
         setupNavBar(title: event.title)
         detailMainView.detailDateLabel.text = convertDate(string: event.datetimeUtc)
+        detailMainView.detailFavButton.addTarget(self, action: #selector(detailFavButtonTapped), for: .touchUpInside)
     }
     private func setupNavBar(title: String) {
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
@@ -39,6 +42,7 @@ class EventDetailVC: UIViewController {
         titleLabel.numberOfLines = 2
         navigationItem.titleView = titleLabel
     }
+    
     
     private func loadDetailImage() {
         guard let event = event, event.performers.count > 0 else {
@@ -56,5 +60,13 @@ class EventDetailVC: UIViewController {
             }
         }
     }
-
+    @objc private func detailFavButtonTapped() {
+        detailMainView.detailFavButton.changeHeartImage()
+        switch heartStatus {
+        case .filled:
+            return
+        case .unfilled:
+            return
+        }
+    }
 }

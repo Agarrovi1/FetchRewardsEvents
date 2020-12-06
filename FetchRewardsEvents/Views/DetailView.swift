@@ -10,7 +10,6 @@ import UIKit
 
 class DetailView: UIView {
 
-    public var navBar = UINavigationBar()
     public var detailImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +26,7 @@ class DetailView: UIView {
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         return locationLabel
     }()
+    public var detailFavButton = FavButton(pointSize: 40)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,10 +42,10 @@ class DetailView: UIView {
         constrainDetailImage()
         constrainDetailDateLabel()
         constrainDetailLocationLabel()
-    }
-    private func makeNavTitle() {
+        constrainDetailFavButton()
         
     }
+    
     private func constrainDetailImage() {
         addSubview(detailImageView)
         NSLayoutConstraint.activate([
@@ -71,6 +71,13 @@ class DetailView: UIView {
             detailLocationLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             detailLocationLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
             detailLocationLabel.centerXAnchor.constraint(equalTo: detailImageView.centerXAnchor)
+        ])
+    }
+    private func constrainDetailFavButton() {
+        addSubview(detailFavButton)
+        NSLayoutConstraint.activate([
+            detailFavButton.topAnchor.constraint(equalTo: detailLocationLabel.bottomAnchor, constant:  8),
+            detailFavButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
