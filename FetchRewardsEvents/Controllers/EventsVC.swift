@@ -76,6 +76,7 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
         }
         cell.nameLabel.text = event.title
         cell.locationLabel.text = event.venue.displayLocation
+        cell.dateLabel.text = convertDate(string: event.datetimeUtc)
         return cell
     }
     
