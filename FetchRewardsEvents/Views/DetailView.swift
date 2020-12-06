@@ -45,6 +45,9 @@ class DetailView: UIView {
         constrainDetailDateLabel()
         constrainDetailLocationLabel()
     }
+    private func makeNavTitle() {
+        
+    }
     private func constrainDetailImage() {
         addSubview(detailImageView)
         NSLayoutConstraint.activate([

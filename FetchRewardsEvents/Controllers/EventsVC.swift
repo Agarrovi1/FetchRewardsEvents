@@ -71,7 +71,7 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let event = events[indexPath.row]
-        if event.performers.count > 1 {
+        if event.performers.count > 0 {
             loadImage(url: event.performers[0].image, cell: cell)
         }
         cell.nameLabel.text = event.title
@@ -81,6 +81,7 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = EventDetailVC()
+        detailVC.event = events[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
