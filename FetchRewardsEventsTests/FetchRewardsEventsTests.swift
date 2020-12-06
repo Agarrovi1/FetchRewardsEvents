@@ -30,5 +30,17 @@ class FetchRewardsEventsTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testEvents() {
+        let example = Event(id: 3333, title: "Example", datetimeUtc: "2020-12-05T08:30:00", venue: Venue(displayLocation: "Chicago, IL"), performers: [Performer(id: 20, image: "example.url")])
+        
+        XCTAssertTrue(example.id == 3333)
+        XCTAssertTrue(example.title == "Example")
+        XCTAssertTrue(example.datetimeUtc == "2020-12-05T08:30:00")
+        XCTAssertTrue(example.venue.displayLocation == "Chicago, IL")
+        XCTAssertTrue(example.performers.count == 1)
+        XCTAssertTrue(example.performers[0].id == 20)
+        XCTAssertTrue(example.performers[0].image == "example.url")
+    }
 
 }
