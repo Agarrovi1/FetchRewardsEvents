@@ -86,7 +86,6 @@ class EventDetailVC: UIViewController {
                 print(error)
             }
         case .unfilled:
-            
             do {
                 try Persistence.shared.delete(event.id)
             } catch {
