@@ -14,7 +14,6 @@ class EventCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .purple
         return imageView
     }()
     public var nameLabel: UILabel = {
@@ -22,20 +21,17 @@ class EventCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 19)
         label.numberOfLines = 3
-        label.backgroundColor = .brown
         return label
     }()
     public var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.numberOfLines = 2
-        dateLabel.backgroundColor = .blue
         return dateLabel
     }()
     public var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        locationLabel.backgroundColor = .gray
         return locationLabel
     }()
 

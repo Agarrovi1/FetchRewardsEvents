@@ -14,19 +14,17 @@ class DetailView: UIView {
     public var detailImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.backgroundColor = .systemPink
         return imgView
     }()
     public var detailDateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.backgroundColor = .green
+        dateLabel.font = UIFont.boldSystemFont(ofSize: 18)
         return dateLabel
     }()
     public var detailLocationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        locationLabel.backgroundColor = .lightGray
         return locationLabel
     }()
     
