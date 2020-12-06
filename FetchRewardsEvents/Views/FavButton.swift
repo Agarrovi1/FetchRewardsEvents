@@ -52,4 +52,14 @@ class FavButton: UIButton {
             heartStatus = .unfilled
         }
     }
+    public func fillHeart() {
+        let config = UIImage.SymbolConfiguration(pointSize: pointSize)
+        let heartFilledImage = UIImage(systemName: "heart.fill", withConfiguration: config)
+        setImage(heartFilledImage, for: .normal)
+    }
+    public func unfillHeart() {
+        let config = UIImage.SymbolConfiguration(pointSize: pointSize)
+        let heartFilledImage = UIImage(systemName: "heart", withConfiguration: config)
+        setImage(heartFilledImage, for: .normal)
+    }
 }

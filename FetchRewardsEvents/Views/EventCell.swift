@@ -9,6 +9,8 @@
 import UIKit
 
 class EventCell: UITableViewCell {
+    var delegate: FavDelegate?
+    
     public var eventImage: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -103,5 +105,12 @@ class EventCell: UITableViewCell {
     }
     @objc private func buttonTapped() {
         favButton.changeHeartImage()
+        switch favButton.heartStatus {
+        case .filled:
+            delegate?.favorited(tag: tag)
+        case .unfilled:
+            delegate?.unfavorited(tag: tag)
+        }
+        
     }
 }

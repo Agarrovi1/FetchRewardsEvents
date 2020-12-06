@@ -10,14 +10,15 @@ import UIKit
 
 class EventDetailVC: UIViewController {
     let detailMainView = DetailView()
-    
-    var heartStatus = HeartImage.unfilled
+    var favorites = [Int]()
     var event: Event?
     let api = APIClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDetails()
+        loadFavorites()
+        setupFavButton()
     }
     override func loadView() {
         super.loadView()
@@ -42,8 +43,22 @@ class EventDetailVC: UIViewController {
         titleLabel.numberOfLines = 2
         navigationItem.titleView = titleLabel
     }
-    
-    
+    private func setupFavButton() {
+        if let event = event {
+            if favorites.contains(event.id) {
+                detailMainView.detailFavButton.heartStatus = .filled
+                detailMainView.detailFavButton.fillHeart()
+            }
+        }
+    }
+    private func loadFavorites() {
+        do {
+            let ids = try Persistence.shared.getObjects()
+            favorites = ids
+        } catch {
+            print(error)
+        }
+    }
     private func loadDetailImage() {
         guard let event = event, event.performers.count > 0 else {
             return
@@ -62,11 +77,21 @@ class EventDetailVC: UIViewController {
     }
     @objc private func detailFavButtonTapped() {
         detailMainView.detailFavButton.changeHeartImage()
-        switch heartStatus {
+        guard let event = event else {return}
+        switch detailMainView.detailFavButton.heartStatus {
         case .filled:
-            return
+            do {
+                try Persistence.shared.save(event.id)
+            } catch {
+                print(error)
+            }
         case .unfilled:
-            return
+            
+            do {
+                try Persistence.shared.delete(event.id)
+            } catch {
+                print(error)
+            }
         }
     }
 }
