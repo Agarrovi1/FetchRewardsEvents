@@ -21,6 +21,7 @@
 		4D55CD93257BFE1700AC877F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD92257BFE1600AC877F /* EventCell.swift */; };
 		4D55CD95257C118500AC877F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD94257C118500AC877F /* DetailView.swift */; };
 		4D55CD97257C20BE00AC877F /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD96257C20BE00AC877F /* EventDetailVC.swift */; };
+		4D55CD99257C920600AC877F /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55CD98257C920600AC877F /* DateConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		4D55CD92257BFE1600AC877F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		4D55CD94257C118500AC877F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		4D55CD96257C20BE00AC877F /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
+		4D55CD98257C920600AC877F /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			children = (
 				4D55CD8A257BE29C00AC877F /* Events.swift */,
 				4D55CD8C257BE70500AC877F /* APIClient.swift */,
+				4D55CD98257C920600AC877F /* DateConverter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				4D55CD95257C118500AC877F /* DetailView.swift in Sources */,
 				4D55CD89257BD0D500AC877F /* Secrets.swift in Sources */,
 				4D55CD64257BCEC200AC877F /* AppDelegate.swift in Sources */,
+				4D55CD99257C920600AC877F /* DateConverter.swift in Sources */,
 				4D55CD97257C20BE00AC877F /* EventDetailVC.swift in Sources */,
 				4D55CD66257BCEC200AC877F /* SceneDelegate.swift in Sources */,
 				4D55CD93257BFE1700AC877F /* EventCell.swift in Sources */,

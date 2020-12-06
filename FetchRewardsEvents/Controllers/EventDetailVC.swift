@@ -29,6 +29,7 @@ class EventDetailVC: UIViewController {
         }
         detailMainView.detailLocationLabel.text = event.venue.displayLocation
         setupNavBar(title: event.title)
+        detailMainView.detailDateLabel.text = convertDate(string: event.datetimeUtc)
     }
     private func setupNavBar(title: String) {
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
