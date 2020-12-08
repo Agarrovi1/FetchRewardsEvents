@@ -9,10 +9,15 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    private lazy var eventVC: EventsVC = {
+        let vc = EventsVC()
+        vc.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+        return vc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        viewControllers = [eventVC]
         // Do any additional setup after loading the view.
     }
     
