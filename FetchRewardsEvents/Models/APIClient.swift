@@ -33,10 +33,11 @@ struct APIClient {
             }
         }.resume()
     }
-    func getEventBy(id: Int, completion: @escaping (Result<Event,Error>) -> ()) {
-        let urlString = "https://api.seatgeek.com/2/events/\(id)?client_id=\(Secrets.clientId)"
+    func getEventsBy(ids: Int, completion: @escaping (Result<[Event],Error>) -> ()) {
+        let urlString = "https://api.seatgeek.com/2/events?client_id=\(Secrets.clientId)&id=\(ids)"
         guard let url = URL(string: urlString) else {
             print("id url error")
+            return
         }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
@@ -44,10 +45,11 @@ struct APIClient {
             }
             guard let data = data else {
                 print("id data error")
+                return
             }
             do {
-                let event = try JSONDecoder().decode(Event.self, from: data)
-                completion(.success(event))
+                let events = try JSONDecoder().decode(EventWrapper.self, from: data)
+                completion(.success(events.events))
             } catch {
                 completion(.failure(error))
             }
