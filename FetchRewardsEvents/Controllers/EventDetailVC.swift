@@ -77,6 +77,7 @@ class EventDetailVC: UIViewController {
     }
     @objc private func detailFavButtonTapped() {
         detailMainView.detailFavButton.changeHeartImage()
+        animateButton()
         guard let event = event else {return}
         switch detailMainView.detailFavButton.heartStatus {
         case .filled:
@@ -91,6 +92,14 @@ class EventDetailVC: UIViewController {
             } catch {
                 print(error)
             }
+        }
+    }
+    private func animateButton() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.detailMainView.detailFavButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }) { (complete) in
+            
+            self.detailMainView.detailFavButton.transform = .identity
         }
     }
 }
