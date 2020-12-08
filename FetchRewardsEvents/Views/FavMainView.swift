@@ -10,12 +10,32 @@ import UIKit
 
 class FavMainView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    public lazy var favTableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.register(EventCell.self, forCellReuseIdentifier: "eventCell")
+        return table
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureFavView() {
+        constrainFaveTableView()
+    }
+    private func constrainFaveTableView() {
+        addSubview(favTableView)
+        NSLayoutConstraint.activate([
+            favTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            favTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            favTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            favTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
 }
