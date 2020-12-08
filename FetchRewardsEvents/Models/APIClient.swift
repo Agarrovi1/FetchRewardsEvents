@@ -33,7 +33,7 @@ struct APIClient {
             }
         }.resume()
     }
-    func getEventsBy(ids: Int, completion: @escaping (Result<[Event],Error>) -> ()) {
+    func getEventsBy(ids: String, completion: @escaping (Result<[Event],Error>) -> ()) {
         let urlString = "https://api.seatgeek.com/2/events?client_id=\(Secrets.clientId)&id=\(ids)"
         guard let url = URL(string: urlString) else {
             print("id url error")

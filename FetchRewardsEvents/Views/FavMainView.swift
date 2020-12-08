@@ -19,6 +19,7 @@ class FavMainView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureFavView()
     }
     
     required init?(coder: NSCoder) {
