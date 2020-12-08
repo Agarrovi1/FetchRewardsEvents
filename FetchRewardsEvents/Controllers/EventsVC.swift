@@ -25,9 +25,9 @@ class EventsVC: UIViewController {
         super.viewDidLoad()
         setDelegates()
         loadFavorites()
+        navigationItem.title = "Search Events"
     }
     override func loadView() {
-        super.loadView()
         view = eventsMainView
     }
     override func viewWillAppear(_ animated: Bool) {
