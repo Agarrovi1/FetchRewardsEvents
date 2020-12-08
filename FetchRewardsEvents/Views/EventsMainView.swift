@@ -10,13 +10,16 @@ import UIKit
 
 class EventsMainView: UIView {
 
-    public var searchBar: UISearchBar = {
+    public lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.translatesAutoresizingMaskIntoConstraints = false
         search.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        search.autocorrectionType = .no
+        search.autocapitalizationType = .none
+        search.placeholder = "search for events ex: football"
         return search
     }()
-    public var eventTableView: UITableView = {
+    public lazy var eventTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(EventCell.self, forCellReuseIdentifier: "eventCell")
