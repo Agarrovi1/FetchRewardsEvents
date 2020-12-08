@@ -14,22 +14,15 @@ class MainTabBarController: UITabBarController {
         vc.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         return vc
     }()
+    private lazy var favVC: FavoritesVC = {
+        let fav = FavoritesVC()
+        fav.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), tag: 1)
+        return fav
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [eventVC]
-        // Do any additional setup after loading the view.
+        viewControllers = [eventVC,favVC]
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
