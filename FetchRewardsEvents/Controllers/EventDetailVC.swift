@@ -64,7 +64,7 @@ class EventDetailVC: UIViewController {
             let ids = try Persistence.shared.getObjects()
             favorites = ids
         } catch {
-            print(error)
+            makeAlert(error: .favError)
         }
     }
     
@@ -72,7 +72,7 @@ class EventDetailVC: UIViewController {
         api.getImageData(urlString: event.performers[0].image) { [weak self] (results) in
             switch results {
             case .failure(let error):
-                print(error)
+                self?.makeAlert(error: error)
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
@@ -90,13 +90,13 @@ class EventDetailVC: UIViewController {
             do {
                 try Persistence.shared.save(event.id)
             } catch {
-                print(error)
+                makeAlert(error: .favError)
             }
         case .unfilled:
             do {
                 try Persistence.shared.delete(event.id)
             } catch {
-                print(error)
+                makeAlert(error: .favError)
             }
         }
     }

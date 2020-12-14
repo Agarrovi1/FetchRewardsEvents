@@ -43,7 +43,7 @@ class EventsVC: UIViewController {
         api.getEvents(query: search) { [weak self] (results) in
             switch results {
             case .failure(let error):
-                print(error)
+                self?.makeAlert(error: error)
             case .success(let eventsFromJSON):
                 self?.events = eventsFromJSON
             }
@@ -57,10 +57,10 @@ class EventsVC: UIViewController {
     }
     
     private func loadImage(url: String,cell: EventCell) {
-        api.getImageData(urlString: url) { [weak cell] (results) in
+        api.getImageData(urlString: url) { [weak cell, weak self] (results) in
             switch results {
             case .failure(let error):
-                print(error)
+                self?.makeAlert(error: error)
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
@@ -75,7 +75,7 @@ class EventsVC: UIViewController {
             let favoritedIds = try Persistence.shared.getObjects()
             favorites = favoritedIds
         } catch {
-            print(error)
+            makeAlert(error: .favError)
         }
     }
 }
@@ -128,7 +128,7 @@ extension EventsVC: FavDelegate {
             try Persistence.shared.save(event.id)
             loadFavorites()
         } catch {
-            print(error)
+            makeAlert(error: .favError)
         }
         
     }
@@ -139,7 +139,8 @@ extension EventsVC: FavDelegate {
             try Persistence.shared.delete(event.id)
             loadFavorites()
         } catch {
-            print(error)
+            makeAlert(error: .favError)
         }
     }
 }
+

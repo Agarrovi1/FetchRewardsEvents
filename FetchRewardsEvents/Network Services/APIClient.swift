@@ -8,66 +8,66 @@
 
 import Foundation
 enum AppError: Error {
+    case imageError
     case urlError
     case dataError
+    case errorFound
+    case decodingError
+    case favError
+    case noFavError
 }
 
 struct APIClient {
-    func getEvents(query: String, completion: @escaping (Result<[Event],Error>) -> ()) {
+    func getEvents(query: String, completion: @escaping (Result<[Event],AppError>) -> ()) {
         let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         let stringURL = "https://api.seatgeek.com/2/events?client_id=\(Secrets.clientId)&q=\(query)"
         guard let url = URL(string: stringURL) else {
-            print("url error")
-            return
+            return completion(.failure(.urlError))
         }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
+            if let _ = error {
+                completion(.failure(.errorFound))
             }
             guard let data = data else {
-                print("data error")
-                return
+                return completion(.failure(.dataError))
             }
             do {
                 let eventWrapper = try JSONDecoder().decode(EventWrapper.self, from: data)
                 return completion(.success(eventWrapper.events))
             } catch {
-                print(error)
+                completion(.failure(.decodingError))
             }
         }.resume()
     }
-    func getEventsBy(ids: String, completion: @escaping (Result<[Event],Error>) -> ()) {
+    func getEventsBy(ids: String, completion: @escaping (Result<[Event],AppError>) -> ()) {
         let urlString = "https://api.seatgeek.com/2/events?client_id=\(Secrets.clientId)&id=\(ids)"
         guard let url = URL(string: urlString) else {
-            print("id url error")
-            return
+            return completion(.failure(AppError.urlError))
         }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
+            if let _ = error {
+                completion(.failure(.errorFound))
             }
             guard let data = data else {
-                print("id data error")
-                return
+                return completion(.failure(.dataError))
             }
             do {
                 let events = try JSONDecoder().decode(EventWrapper.self, from: data)
                 completion(.success(events.events))
             } catch {
-                completion(.failure(error))
+                completion(.failure(.decodingError))
             }
         }.resume()
     }
     
-    func getImageData(urlString: String, completion: @escaping (Result<Data,Error>) ->()) {
+    func getImageData(urlString: String, completion: @escaping (Result<Data,AppError>) ->()) {
         guard let url = URL(string: urlString) else {
-            print("bad url")
-            return
+            return completion(.failure(.imageError))
         }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
+            if let _ = error {
+                completion(.failure(.imageError))
             }
             if let data = data {
                 completion(.success(data))

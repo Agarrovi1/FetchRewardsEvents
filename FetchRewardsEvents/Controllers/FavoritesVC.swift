@@ -72,6 +72,7 @@ class FavoritesVC: UIViewController {
             switch results {
             case .failure(let error):
                 print(error)
+                self?.favEvents = []
             case .success(let events):
                 self?.favEvents = events
             }
@@ -79,10 +80,10 @@ class FavoritesVC: UIViewController {
     }
     
     private func loadImage(url: String,cell: EventCell) {
-        api.getImageData(urlString: url) { (results) in
+        api.getImageData(urlString: url) { [weak self] (results) in
             switch results {
             case .failure(let error):
-                print(error)
+                self?.makeAlert(error: error)
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
@@ -126,9 +127,8 @@ extension FavoritesVC: FavDelegate {
         let event = favEvents[tag]
         do {
             try Persistence.shared.save(event.id)
-            loadPersistedFav()
         } catch {
-            print(error)
+            makeAlert(error: .favError)
         }
     }
     
@@ -136,9 +136,8 @@ extension FavoritesVC: FavDelegate {
         let event = favEvents[tag]
         do {
             try Persistence.shared.delete(event.id)
-            loadPersistedFav()
         } catch {
-            print(error)
+            makeAlert(error: .favError)
         }
     }
 }
