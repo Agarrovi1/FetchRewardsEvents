@@ -7,6 +7,10 @@
 //
 
 import Foundation
+enum AppError: Error {
+    case urlError
+    case dataError
+}
 
 struct APIClient {
     func getEvents(query: String, completion: @escaping (Result<[Event],Error>) -> ()) {

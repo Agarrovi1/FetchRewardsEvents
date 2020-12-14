@@ -57,6 +57,14 @@ class EventCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func configureCell(event: Event, indexPath: IndexPath, VCDelegate: FavDelegate) {
+        nameLabel.text = event.title
+        locationLabel.text = event.venue.displayLocation
+        dateLabel.text = event.datetimeUtc.convertDate()
+        tag = indexPath.row
+        delegate = VCDelegate
+    }
+    
     private func configureTableCell() {
         constrainImageView()
         constrainNameLabel()

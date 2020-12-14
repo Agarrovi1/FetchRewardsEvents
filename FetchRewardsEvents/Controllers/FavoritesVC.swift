@@ -60,9 +60,8 @@ class FavoritesVC: UIViewController {
     }
     
     private func makeIdString(ids: [Int]) -> String {
-        var str = ""
-        for id in ids {
-            str += String(id) + ","
+        var str = ids.reduce("") { (ids, nextId) -> String in
+            return ids + "\(nextId),"
         }
         let _ = str.popLast()
         return str
@@ -104,14 +103,10 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let event = favEvents[indexPath.row]
+        cell.configureCell(event: event, indexPath: indexPath, VCDelegate: self)
         if event.performers.count > 0 {
             loadImage(url: event.performers[0].image, cell: cell)
         }
-        cell.nameLabel.text = event.title
-        cell.locationLabel.text = event.venue.displayLocation
-        cell.dateLabel.text = event.datetimeUtc.convertDate()
-        cell.delegate = self
-        cell.tag = indexPath.row
         if favoriteIds.contains(event.id) {
             cell.favButton.heartStatus = .filled
             cell.favButton.fillHeart()

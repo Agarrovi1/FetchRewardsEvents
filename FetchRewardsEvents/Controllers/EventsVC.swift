@@ -87,18 +87,14 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as? EventCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EventCell.reuseID) as? EventCell else {
             return UITableViewCell()
         }
         let event = events[indexPath.row]
+        cell.configureCell(event: event, indexPath: indexPath, VCDelegate: self)
         if event.performers.count > 0 {
             loadImage(url: event.performers[0].image, cell: cell)
         }
-        cell.nameLabel.text = event.title
-        cell.locationLabel.text = event.venue.displayLocation
-        cell.dateLabel.text = event.datetimeUtc.convertDate()
-        cell.tag = indexPath.row
-        cell.delegate = self
         if favorites.contains(event.id) {
             cell.favButton.heartStatus = .filled
             cell.favButton.fillHeart()
