@@ -18,25 +18,25 @@ class EventsVC: UIViewController {
     }
     private var favorites = [Int]()
     private let api = APIClient()
-    
     private let eventsMainView = EventsMainView()
-
+    
+    override func loadView() {
+        view = eventsMainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegates()
         loadFavorites()
         navigationItem.title = "Search Events"
     }
-    override func loadView() {
-        view = eventsMainView
-    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadFavorites()
         DispatchQueue.main.async { [weak self] in
             self?.eventsMainView.eventTableView.reloadData()
         }
-        
     }
     
     private func loadEvents(search: String) {
@@ -49,24 +49,27 @@ class EventsVC: UIViewController {
             }
         }
     }
+    
     private func setDelegates() {
         eventsMainView.eventTableView.dataSource = self
         eventsMainView.eventTableView.delegate = self
         eventsMainView.searchBar.delegate = self
     }
+    
     private func loadImage(url: String,cell: EventCell) {
-        api.getImageData(urlString: url) { (results) in
+        api.getImageData(urlString: url) { [weak cell] (results) in
             switch results {
             case .failure(let error):
                 print(error)
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
-                    cell.eventImage.image = image
+                    cell?.eventImage.image = image
                 }
             }
         }
     }
+    
     private func loadFavorites() {
         do {
             let favoritedIds = try Persistence.shared.getObjects()
@@ -93,7 +96,7 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
         }
         cell.nameLabel.text = event.title
         cell.locationLabel.text = event.venue.displayLocation
-        cell.dateLabel.text = convertDate(string: event.datetimeUtc)
+        cell.dateLabel.text = event.datetimeUtc.convertDate()
         cell.tag = indexPath.row
         cell.delegate = self
         if favorites.contains(event.id) {
@@ -107,15 +110,13 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = EventDetailVC()
-        detailVC.event = events[indexPath.row]
+        let detailVC = EventDetailVC(event: events[indexPath.row])
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         view.frame.height * 0.25
     }
-    
 }
 
 extension EventsVC: UISearchBarDelegate {
@@ -145,5 +146,4 @@ extension EventsVC: FavDelegate {
             print(error)
         }
     }
-    
 }
