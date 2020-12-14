@@ -9,17 +9,27 @@
 import UIKit
 
 class EventDetailVC: UIViewController {
-    let detailMainView = DetailView()
-    var favorites = [Int]()
-    var event: Event?
-    let api = APIClient()
-
+    private let detailMainView = DetailView()
+    private var favorites = [Int]()
+    private var event: Event
+    private let api = APIClient()
+    
+    init(event: Event) {
+        self.event = event
+        super.init(nibName: nil, bundle: nil)
+    }
+        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDetails()
         loadFavorites()
         setupFavButton()
     }
+    
     override func loadView() {
         super.loadView()
         view = detailMainView
@@ -27,14 +37,12 @@ class EventDetailVC: UIViewController {
     
     private func configureDetails() {
         loadDetailImage()
-        guard let event = event else {
-            return
-        }
         detailMainView.detailLocationLabel.text = event.venue.displayLocation
         setupNavBar(title: event.title)
-        detailMainView.detailDateLabel.text = convertDate(string: event.datetimeUtc)
+        detailMainView.detailDateLabel.text = event.datetimeUtc.convertDate()
         detailMainView.detailFavButton.addTarget(self, action: #selector(detailFavButtonTapped), for: .touchUpInside)
     }
+    
     private func setupNavBar(title: String) {
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         titleLabel.text = title
@@ -43,14 +51,14 @@ class EventDetailVC: UIViewController {
         titleLabel.numberOfLines = 2
         navigationItem.titleView = titleLabel
     }
+    
     private func setupFavButton() {
-        if let event = event {
-            if favorites.contains(event.id) {
-                detailMainView.detailFavButton.heartStatus = .filled
-                detailMainView.detailFavButton.fillHeart()
-            }
+        if favorites.contains(event.id) {
+            detailMainView.detailFavButton.heartStatus = .filled
+            detailMainView.detailFavButton.fillHeart()
         }
     }
+    
     private func loadFavorites() {
         do {
             let ids = try Persistence.shared.getObjects()
@@ -59,10 +67,8 @@ class EventDetailVC: UIViewController {
             print(error)
         }
     }
+    
     private func loadDetailImage() {
-        guard let event = event, event.performers.count > 0 else {
-            return
-        }
         api.getImageData(urlString: event.performers[0].image) { [weak self] (results) in
             switch results {
             case .failure(let error):
@@ -75,10 +81,10 @@ class EventDetailVC: UIViewController {
             }
         }
     }
+    
     @objc private func detailFavButtonTapped() {
         detailMainView.detailFavButton.changeHeartImage()
         animateButton()
-        guard let event = event else {return}
         switch detailMainView.detailFavButton.heartStatus {
         case .filled:
             do {
@@ -94,6 +100,7 @@ class EventDetailVC: UIViewController {
             }
         }
     }
+    
     private func animateButton() {
         UIView.animate(withDuration: 0.3, animations: {
             self.detailMainView.detailFavButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
