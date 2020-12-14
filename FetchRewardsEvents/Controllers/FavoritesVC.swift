@@ -24,25 +24,32 @@ class FavoritesVC: UIViewController {
         }
     }
     private let api = APIClient()
-
+    
+    override func loadView() {
+        view = favMainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFavDelegates()
-        loadPersistedFav()
+        configFavVC()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadPersistedFav()
     }
     
-    override func loadView() {
-        view = favMainView
+    private func configFavVC() {
+        setFavDelegates()
+        loadPersistedFav()
+        navigationItem.title = "Favorites"
     }
     
     private func setFavDelegates() {
         favMainView.favTableView.delegate = self
         favMainView.favTableView.dataSource = self
     }
+    
     private func loadPersistedFav() {
         do {
             let ids = try Persistence.shared.getObjects()
@@ -51,6 +58,7 @@ class FavoritesVC: UIViewController {
             print(error)
         }
     }
+    
     private func makeIdString(ids: [Int]) -> String {
         var str = ""
         for id in ids {
@@ -59,6 +67,7 @@ class FavoritesVC: UIViewController {
         let _ = str.popLast()
         return str
     }
+    
     private func loadFavEvents(idString: String) {
         api.getEventsBy(ids: idString) { [weak self] (results) in
             switch results {
@@ -69,6 +78,7 @@ class FavoritesVC: UIViewController {
             }
         }
     }
+    
     private func loadImage(url: String,cell: EventCell) {
         api.getImageData(urlString: url) { (results) in
             switch results {
@@ -82,7 +92,6 @@ class FavoritesVC: UIViewController {
             }
         }
     }
-
 }
 
 extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
@@ -91,7 +100,7 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as? EventCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EventCell.reuseID) as? EventCell else {
             return UITableViewCell()
         }
         let event = favEvents[indexPath.row]
@@ -100,7 +109,7 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
         }
         cell.nameLabel.text = event.title
         cell.locationLabel.text = event.venue.displayLocation
-        cell.dateLabel.text = convertDate(string: event.datetimeUtc)
+        cell.dateLabel.text = event.datetimeUtc.convertDate()
         cell.delegate = self
         cell.tag = indexPath.row
         if favoriteIds.contains(event.id) {
@@ -115,7 +124,6 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         view.frame.height * 0.25
     }
-    
 }
 
 extension FavoritesVC: FavDelegate {
@@ -138,6 +146,4 @@ extension FavoritesVC: FavDelegate {
             print(error)
         }
     }
-    
-    
 }
