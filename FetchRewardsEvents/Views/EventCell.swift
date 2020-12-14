@@ -10,6 +10,7 @@ import UIKit
 
 
 class EventCell: UITableViewCell {
+    
     static let reuseID = "eventCell"
     public weak var delegate: FavDelegate?
     public var eventImage: UIImageView = {

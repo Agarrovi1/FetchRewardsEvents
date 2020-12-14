@@ -10,7 +10,7 @@ import UIKit
 
 class EventsMainView: UIView {
 
-    public lazy var searchBar: UISearchBar = {
+    public var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.translatesAutoresizingMaskIntoConstraints = false
         search.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
@@ -19,7 +19,7 @@ class EventsMainView: UIView {
         search.placeholder = "search for events ex: football"
         return search
     }()
-    public lazy var eventTableView: UITableView = {
+    public var eventTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(EventCell.self, forCellReuseIdentifier: "eventCell")
@@ -40,6 +40,7 @@ class EventsMainView: UIView {
         constrainSearchBar()
         constrainTableView()
     }
+    
     private func constrainSearchBar() {
         addSubview(searchBar)
         NSLayoutConstraint.activate([
@@ -47,6 +48,7 @@ class EventsMainView: UIView {
             searchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: trailingAnchor)])
     }
+    
     private func constrainTableView() {
         addSubview(eventTableView)
         NSLayoutConstraint.activate([
