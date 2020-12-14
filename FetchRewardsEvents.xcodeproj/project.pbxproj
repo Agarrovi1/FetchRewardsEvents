@@ -107,6 +107,9 @@
 		4D55CD62257BCEC200AC877F /* FetchRewardsEvents */ = {
 			isa = PBXGroup;
 			children = (
+				4D8000712587DB65004E390E /* Persistence */,
+				4D8000702587DB38004E390E /* Extensions */,
+				4D80006F2587DA86004E390E /* Network Services */,
 				4D55CD87257BCFF600AC877F /* Models */,
 				4D55CD86257BCFEE00AC877F /* Views */,
 				4D55CD85257BCFD300AC877F /* Controllers */,
@@ -157,12 +160,33 @@
 			isa = PBXGroup;
 			children = (
 				4D55CD8A257BE29C00AC877F /* Events.swift */,
-				4D55CD8C257BE70500AC877F /* APIClient.swift */,
-				4D55CD98257C920600AC877F /* DateConverter.swift */,
-				4D55CD9C257CA80B00AC877F /* Persistence.swift */,
 				4D55CD9E257CABDC00AC877F /* FavDelegate.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4D80006F2587DA86004E390E /* Network Services */ = {
+			isa = PBXGroup;
+			children = (
+				4D55CD8C257BE70500AC877F /* APIClient.swift */,
+			);
+			path = "Network Services";
+			sourceTree = "<group>";
+		};
+		4D8000702587DB38004E390E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4D55CD98257C920600AC877F /* DateConverter.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4D8000712587DB65004E390E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				4D55CD9C257CA80B00AC877F /* Persistence.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

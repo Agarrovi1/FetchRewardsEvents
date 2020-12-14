@@ -9,12 +9,12 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    private lazy var eventVC: EventsVC = {
+    private var eventVC: EventsVC = {
         let vc = EventsVC()
         vc.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         return vc
     }()
-    private lazy var favVC: FavoritesVC = {
+    private var favVC: FavoritesVC = {
         let fav = FavoritesVC()
         fav.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), tag: 1)
         return fav
@@ -22,7 +22,8 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [eventVC,favVC]
+        let navEvents = UINavigationController(rootViewController: eventVC)
+        let navFav = UINavigationController(rootViewController: favVC)
+        viewControllers = [navEvents,navFav]
     }
-
 }
