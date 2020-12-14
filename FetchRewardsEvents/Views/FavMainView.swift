@@ -29,6 +29,7 @@ class FavMainView: UIView {
     private func configureFavView() {
         constrainFaveTableView()
     }
+    
     private func constrainFaveTableView() {
         addSubview(favTableView)
         NSLayoutConstraint.activate([
@@ -38,5 +39,4 @@ class FavMainView: UIView {
             favTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
 }
