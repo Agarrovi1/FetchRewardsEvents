@@ -8,9 +8,10 @@
 
 import UIKit
 
+
 class EventCell: UITableViewCell {
-    var delegate: FavDelegate?
-    
+    static let reuseID = "eventCell"
+    public weak var delegate: FavDelegate?
     public var eventImage: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -45,6 +46,7 @@ class EventCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureTableCell()
@@ -62,6 +64,7 @@ class EventCell: UITableViewCell {
         constrainFavButton()
         favButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
+    
     private func constrainImageView() {
         contentView.addSubview(eventImage)
         NSLayoutConstraint.activate([
@@ -71,6 +74,7 @@ class EventCell: UITableViewCell {
             eventImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8)
         ])
     }
+    
     private func constrainNameLabel() {
         contentView.addSubview(nameLabel)
         NSLayoutConstraint.activate([
@@ -79,6 +83,7 @@ class EventCell: UITableViewCell {
             nameLabel.bottomAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -8),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)])
     }
+    
     private func constrainLocationLabel() {
         contentView.addSubview(locationLabel)
         NSLayoutConstraint.activate([
@@ -88,6 +93,7 @@ class EventCell: UITableViewCell {
             locationLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.20),
         ])
     }
+    
     private func constrainDateLabel() {
         contentView.addSubview(dateLabel)
         NSLayoutConstraint.activate([
@@ -97,12 +103,14 @@ class EventCell: UITableViewCell {
             dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }
+    
     private func constrainFavButton() {
         contentView.addSubview(favButton)
         NSLayoutConstraint.activate([
             favButton.topAnchor.constraint(equalTo: locationLabel.centerYAnchor),
             favButton.centerXAnchor.constraint(equalTo: eventImage.centerXAnchor)])
     }
+    
     @objc private func buttonTapped() {
         favButton.changeHeartImage()
         switch favButton.heartStatus {
@@ -111,6 +119,5 @@ class EventCell: UITableViewCell {
         case .unfilled:
             delegate?.unfavorited(tag: tag)
         }
-        
     }
 }
