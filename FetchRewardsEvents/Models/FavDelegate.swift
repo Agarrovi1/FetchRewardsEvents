@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FavDelegate {
+protocol FavDelegate: AnyObject {
     func favorited(tag: Int)
     func unfavorited(tag: Int)
 }
