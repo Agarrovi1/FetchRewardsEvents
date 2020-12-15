@@ -13,7 +13,7 @@ class EventsMainView: UIView {
     public var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.translatesAutoresizingMaskIntoConstraints = false
-        search.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        search.barTintColor = .systemTeal
         search.autocorrectionType = .no
         search.autocapitalizationType = .none
         search.placeholder = "search for events ex: football"
@@ -36,7 +36,7 @@ class EventsMainView: UIView {
     }
     
     private func configureView() {
-        backgroundColor = .systemBlue
+        //backgroundColor = .systemBlue
         constrainSearchBar()
         constrainTableView()
     }

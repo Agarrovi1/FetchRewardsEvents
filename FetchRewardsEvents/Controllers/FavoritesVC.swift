@@ -55,7 +55,7 @@ class FavoritesVC: UIViewController {
             let ids = try Persistence.shared.getObjects()
             favoriteIds = ids
         } catch {
-            print(error)
+            makeAlert(title: "Favorites Error", message: "No favorites")
         }
     }
     
@@ -70,8 +70,7 @@ class FavoritesVC: UIViewController {
     private func loadFavEvents(idString: String) {
         api.getEventsBy(ids: idString) { [weak self] (results) in
             switch results {
-            case .failure(let error):
-                print(error)
+            case .failure(_):
                 self?.favEvents = []
             case .success(let events):
                 self?.favEvents = events
