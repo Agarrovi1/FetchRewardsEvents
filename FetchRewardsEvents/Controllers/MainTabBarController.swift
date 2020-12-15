@@ -24,6 +24,8 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         let navEvents = UINavigationController(rootViewController: eventVC)
         let navFav = UINavigationController(rootViewController: favVC)
+        tabBar.barTintColor = .systemTeal
+        tabBar.tintColor = .white
         viewControllers = [navEvents,navFav]
     }
 }
