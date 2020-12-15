@@ -12,4 +12,4 @@ struct Secrets {
     static let clientId = ""
 }
 ```
-4. Paste in your SeatGeeks client_Id into clientId property
+4. Paste in your [SeatGeeks](https://seatgeek.com/account/develop) client_Id into clientId property
