@@ -27,6 +27,7 @@ class FavMainView: UIView {
     }
     
     private func configureFavView() {
+        backgroundColor = .systemBlue
         constrainFaveTableView()
     }
     

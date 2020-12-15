@@ -64,15 +64,15 @@ class EventDetailVC: UIViewController {
             let ids = try Persistence.shared.getObjects()
             favorites = ids
         } catch {
-            makeAlert(error: .favError)
+            makeAlert(title: "Favorite Empty", message: "How about browsing in the Search tab?")
         }
     }
     
     private func loadDetailImage() {
         api.getImageData(urlString: event.performers[0].image) { [weak self] (results) in
             switch results {
-            case .failure(let error):
-                self?.makeAlert(error: error)
+            case .failure(_):
+                self?.makeAlert(title: "Image Error", message: "Couldn't load image")
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
@@ -90,13 +90,13 @@ class EventDetailVC: UIViewController {
             do {
                 try Persistence.shared.save(event.id)
             } catch {
-                makeAlert(error: .favError)
+                makeAlert(title: "Favorites Error", message: "Couldn't save event")
             }
         case .unfilled:
             do {
                 try Persistence.shared.delete(event.id)
             } catch {
-                makeAlert(error: .favError)
+                makeAlert(title: "Favorites Error", message: "Couldn't delete event")
             }
         }
     }

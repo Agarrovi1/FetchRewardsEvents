@@ -82,8 +82,8 @@ class FavoritesVC: UIViewController {
     private func loadImage(url: String,cell: EventCell) {
         api.getImageData(urlString: url) { [weak self] (results) in
             switch results {
-            case .failure(let error):
-                self?.makeAlert(error: error)
+            case .failure(_):
+                self?.makeAlert(title: "Image Error", message: "Couldn't find image data")
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
@@ -128,7 +128,7 @@ extension FavoritesVC: FavDelegate {
         do {
             try Persistence.shared.save(event.id)
         } catch {
-            makeAlert(error: .favError)
+            makeAlert(title: "Favorites Error", message: "Couldn't save event")
         }
     }
     
@@ -137,7 +137,7 @@ extension FavoritesVC: FavDelegate {
         do {
             try Persistence.shared.delete(event.id)
         } catch {
-            makeAlert(error: .favError)
+            makeAlert(title: "Favorites Error", message: "Couldn't delete event")
         }
     }
 }
