@@ -4,7 +4,7 @@ An app that utilizes the [SeatGeeks API](https://platform.seatgeek.com/) to sear
 
 # Instructions:
 1. Clone the app
-2. Create a file called Secrets.swift
+2. Delete the Secrets.swift file and create a new one with the same name
 3. Copy into Secrets.swift this code snippet below
 
 ```swift
@@ -12,4 +12,4 @@ struct Secrets {
     static let clientId = ""
 }
 ```
-4. Paste in your [SeatGeeks](https://seatgeek.com/account/develop) client_Id into clientId property
+4. Paste in your [SeatGeeks](https://seatgeek.com/?next=%2Faccount%2Fdevelop#login) client_Id into clientId property
