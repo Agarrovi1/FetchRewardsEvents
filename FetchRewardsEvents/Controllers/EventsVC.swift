@@ -43,7 +43,7 @@ class EventsVC: UIViewController {
         api.getEvents(query: search) { [weak self] (results) in
             switch results {
             case .failure(let error):
-                self?.makeAlert(error: error)
+                self?.makeAlert(title: "Network Call Error", message: "\(error.localizedDescription)")
             case .success(let eventsFromJSON):
                 self?.events = eventsFromJSON
             }
@@ -59,8 +59,8 @@ class EventsVC: UIViewController {
     private func loadImage(url: String,cell: EventCell) {
         api.getImageData(urlString: url) { [weak cell, weak self] (results) in
             switch results {
-            case .failure(let error):
-                self?.makeAlert(error: error)
+            case .failure(_):
+                self?.makeAlert(title: "Image Error", message: "Couldn't find image data")
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
@@ -75,7 +75,7 @@ class EventsVC: UIViewController {
             let favoritedIds = try Persistence.shared.getObjects()
             favorites = favoritedIds
         } catch {
-            makeAlert(error: .favError)
+            makeAlert(title: "Favorites Error", message: "Trouble loading favorites")
         }
     }
 }
@@ -128,7 +128,7 @@ extension EventsVC: FavDelegate {
             try Persistence.shared.save(event.id)
             loadFavorites()
         } catch {
-            makeAlert(error: .favError)
+            makeAlert(title: "Favorites Error", message: "Couldn't save event")
         }
         
     }
@@ -139,7 +139,7 @@ extension EventsVC: FavDelegate {
             try Persistence.shared.delete(event.id)
             loadFavorites()
         } catch {
-            makeAlert(error: .favError)
+            makeAlert(title: "Favorites Error", message: "Couldn't delete event")
         }
     }
 }
