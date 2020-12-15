@@ -1,6 +1,6 @@
 # FetchRewardsEvents
 
-An app that utilizes the [SeatGeeks API](https://platform.seatgeek.com/) to search events and you can favorite them as well.
+An app that utilizes the [SeatGeeks API](https://platform.seatgeek.com/) to search events and you can persist them as well.
 
 # Instructions:
 1. Clone the app
