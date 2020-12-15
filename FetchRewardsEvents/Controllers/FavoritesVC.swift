@@ -1,101 +1,114 @@
 //
-//  EventsVC.swift
+//  FavoritesVC.swift
 //  FetchRewardsEvents
 //
-//  Created by Angela Garrovillas on 12/5/20.
+//  Created by Angela Garrovillas on 12/8/20.
 //  Copyright © 2020 Angela Garrovillas. All rights reserved.
 //
 
 import UIKit
 
-class EventsVC: UIViewController {
-    private var events = [Event]() {
+class FavoritesVC: UIViewController {
+    private var favMainView = FavMainView()
+    private var favoriteIds = [Int]() {
+        didSet {
+            let idStr = makeIdString(ids: favoriteIds)
+            loadFavEvents(idString: idStr)
+        }
+    }
+    private var favEvents = [Event]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                self?.eventsMainView.eventTableView.reloadData()
+                self?.favMainView.favTableView.reloadData()
             }
         }
     }
-    private var favorites = [Int]()
     private let api = APIClient()
-    private let eventsMainView = EventsMainView()
     
     override func loadView() {
-        view = eventsMainView
+        view = favMainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegates()
-        loadFavorites()
-        navigationItem.title = "Search Events"
+        configFavVC()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFavorites()
-        DispatchQueue.main.async { [weak self] in
-            self?.eventsMainView.eventTableView.reloadData()
+        loadPersistedFav()
+    }
+    
+    private func configFavVC() {
+        setFavDelegates()
+        loadPersistedFav()
+        navigationItem.title = "Favorites"
+    }
+    
+    private func setFavDelegates() {
+        favMainView.favTableView.delegate = self
+        favMainView.favTableView.dataSource = self
+    }
+    
+    private func loadPersistedFav() {
+        do {
+            let ids = try Persistence.shared.getObjects()
+            favoriteIds = ids
+        } catch {
+            print(error)
         }
     }
     
-    private func loadEvents(search: String) {
-        api.getEvents(query: search) { [weak self] (results) in
+    private func makeIdString(ids: [Int]) -> String {
+        var str = ids.reduce("") { (ids, nextId) -> String in
+            return ids + "\(nextId),"
+        }
+        let _ = str.popLast()
+        return str
+    }
+    
+    private func loadFavEvents(idString: String) {
+        api.getEventsBy(ids: idString) { [weak self] (results) in
             switch results {
             case .failure(let error):
-                self?.makeAlert(error: error)
-            case .success(let eventsFromJSON):
-                self?.events = eventsFromJSON
+                print(error)
+                self?.favEvents = []
+            case .success(let events):
+                self?.favEvents = events
             }
         }
     }
     
-    private func setDelegates() {
-        eventsMainView.eventTableView.dataSource = self
-        eventsMainView.eventTableView.delegate = self
-        eventsMainView.searchBar.delegate = self
-    }
-    
     private func loadImage(url: String,cell: EventCell) {
-        api.getImageData(urlString: url) { [weak cell, weak self] (results) in
+        api.getImageData(urlString: url) { [weak self] (results) in
             switch results {
             case .failure(let error):
                 self?.makeAlert(error: error)
             case .success(let imageData):
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
-                    cell?.eventImage.image = image
+                    cell.eventImage.image = image
                 }
             }
         }
     }
-    
-    private func loadFavorites() {
-        do {
-            let favoritedIds = try Persistence.shared.getObjects()
-            favorites = favoritedIds
-        } catch {
-            makeAlert(error: .favError)
-        }
-    }
 }
 
-extension EventsVC: UITableViewDataSource, UITableViewDelegate {
-    
+extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        events.count
+        favEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EventCell.reuseID) as? EventCell else {
             return UITableViewCell()
         }
-        let event = events[indexPath.row]
+        let event = favEvents[indexPath.row]
         cell.configureCell(event: event, indexPath: indexPath, VCDelegate: self)
         if event.performers.count > 0 {
             loadImage(url: event.performers[0].image, cell: cell)
         }
-        if favorites.contains(event.id) {
+        if favoriteIds.contains(event.id) {
             cell.favButton.heartStatus = .filled
             cell.favButton.fillHeart()
         } else {
@@ -104,43 +117,27 @@ extension EventsVC: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = EventDetailVC(event: events[indexPath.row])
-        navigationController?.pushViewController(detailVC, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         view.frame.height * 0.25
     }
 }
 
-extension EventsVC: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        loadEvents(search: searchBar.text ?? "")
-    }
-}
-
-extension EventsVC: FavDelegate {
+extension FavoritesVC: FavDelegate {
     func favorited(tag: Int) {
-        let event = events[tag]
+        let event = favEvents[tag]
         do {
             try Persistence.shared.save(event.id)
-            loadFavorites()
         } catch {
             makeAlert(error: .favError)
         }
-        
     }
     
     func unfavorited(tag: Int) {
-        let event = events[tag]
+        let event = favEvents[tag]
         do {
             try Persistence.shared.delete(event.id)
-            loadFavorites()
         } catch {
             makeAlert(error: .favError)
         }
     }
 }
-

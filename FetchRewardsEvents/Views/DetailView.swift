@@ -12,6 +12,7 @@ class DetailView: UIView {
 
     public var detailImageView: UIImageView = {
         let imgView = UIImageView()
+        imgView.contentMode = .scaleAspectFit
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
@@ -43,7 +44,6 @@ class DetailView: UIView {
         constrainDetailDateLabel()
         constrainDetailLocationLabel()
         constrainDetailFavButton()
-        
     }
     
     private func constrainDetailImage() {
@@ -55,6 +55,7 @@ class DetailView: UIView {
             detailImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
+    
     private func constrainDetailDateLabel() {
         addSubview(detailDateLabel)
         NSLayoutConstraint.activate([
@@ -64,6 +65,7 @@ class DetailView: UIView {
             detailDateLabel.centerXAnchor.constraint(equalTo: detailImageView.centerXAnchor)
         ])
     }
+    
     private func constrainDetailLocationLabel() {
         addSubview(detailLocationLabel)
         NSLayoutConstraint.activate([
@@ -73,6 +75,7 @@ class DetailView: UIView {
             detailLocationLabel.centerXAnchor.constraint(equalTo: detailImageView.centerXAnchor)
         ])
     }
+    
     private func constrainDetailFavButton() {
         addSubview(detailFavButton)
         NSLayoutConstraint.activate([
@@ -80,5 +83,4 @@ class DetailView: UIView {
             detailFavButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
-    
 }
