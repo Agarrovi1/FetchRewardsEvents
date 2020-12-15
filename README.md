@@ -1,6 +1,6 @@
 # FetchRewardsEvents
 
-An app that utilizes the SeetGeeks API to search events and you can favorite them as well.
+An app that utilizes the [SeatGeeks API](https://platform.seatgeek.com/) to search events and you can favorite them as well.
 
 # Instructions:
 1. Clone the app
@@ -12,4 +12,4 @@ struct Secrets {
     static let clientId = ""
 }
 ```
-4. Paste in your SeetGeeks client_Id into clientId property
+4. Paste in your SeatGeeks client_Id into clientId property
