@@ -2,6 +2,8 @@
 
 An app that utilizes the [SeatGeeks API](https://platform.seatgeek.com/) to search events and you can persist them as well.
 
+<img src=https://github.com/Agarrovi1/FetchRewardsEvents/blob/main/Images/FetchRewardsScreenShot.png alt=Example width=343 height=743>
+
 # Instructions:
 1. Clone the app
 2. Delete the Secrets.swift file and create a new one with the same name
